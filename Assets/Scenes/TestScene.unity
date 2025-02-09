@@ -1051,7 +1051,7 @@ MonoBehaviour:
   wallLayer:
     serializedVersion: 2
     m_Bits: 64
-  climbSpeed: 3
+  climbSpeed: 4
   wallJumpForce: 5
   jumpHeight: 7
   wallJumpTime: 0.5
@@ -1074,7 +1074,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 0.2}
+  m_Size: {x: 2.2, y: 1.2, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &1745799694
 Rigidbody:
@@ -1147,7 +1147,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 043304a814beeee40b60cd11c4796ad4, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fcecd9a201fbed84c89e23fd095e6c44, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1157,7 +1157,7 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  m_SpriteSortPoint: 1
 --- !u!4 &1745799696
 Transform:
   m_ObjectHideFlags: 0

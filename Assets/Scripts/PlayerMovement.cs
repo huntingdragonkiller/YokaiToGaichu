@@ -94,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
 
         bool IsTouchingWall()
         {
-            float wallCheckDistance = 0.5f;
+            float wallCheckDistance = 1.2f;
             Vector3 direction = new Vector3(facingDirection, 0, 0);
             // Dray the ray in scene view
             Debug.DrawRay(transform.position, direction * wallCheckDistance, Color.red);
