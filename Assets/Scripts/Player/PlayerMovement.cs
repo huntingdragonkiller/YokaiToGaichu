@@ -8,13 +8,13 @@ public class PlayerMovement : MonoBehaviour
     private float _move;
     
     public LayerMask wallLayer;
-    public float climbSpeed = 3f;
-    public float wallJumpForce = 5f;
-    public float jumpHeight = 7f;
-    public float wallJumpTime = 0.5f;  // Time window to allow wall jumping
-    private bool canWallJump = false;
-    private float lastWallTouchTime;
-    private float facingDirection = 1f; // 1 for right, -1 for left
+    private float _climbSpeed;
+    private float _wallJumpForce;
+    private float _jumpHeight;
+    private float _wallJumpTime = 0.5f;  // Time window to allow wall jumping
+    private bool _canWallJump;
+    private float _lastWallTouchTime;
+    private float _facingDirection = 1f; // 1 for right, -1 for left
     private bool _isTouchingWall;
     
     private Rigidbody _rb;
@@ -25,6 +25,9 @@ public class PlayerMovement : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _sr = GetComponent<SpriteRenderer>();
+        _climbSpeed = (3 / 5f * speed);
+        _wallJumpForce = speed;
+        _jumpHeight = jumpForce;
     }
 
     void Update()
@@ -52,8 +55,8 @@ public class PlayerMovement : MonoBehaviour
 
         if (_isTouchingWall)
         {
-            canWallJump = true;
-            lastWallTouchTime = 0.25f;
+            _canWallJump = true;
+            _lastWallTouchTime = 0.25f;
             if (Input.GetKey(KeyCode.W)) // Climb up with W
             {
                 WallClimb(1f); // Move Up
@@ -67,7 +70,7 @@ public class PlayerMovement : MonoBehaviour
                 // If no input, stop vertical movement
                 _rb.linearVelocity = new Vector3(_rb.linearVelocity.x, 0, 0);
             }
-            if (Input.GetKeyDown(KeyCode.Space) && (canWallJump))
+            if (Input.GetKeyDown(KeyCode.Space) && (_canWallJump) && (Time.time - _lastWallTouchTime > _wallJumpTime))
             {
                 WallJump();
             }
@@ -75,27 +78,27 @@ public class PlayerMovement : MonoBehaviour
         else
         {
             _rb.useGravity = true;
-            lastWallTouchTime -= Time.deltaTime;
+            _lastWallTouchTime -= Time.deltaTime;
         }
         
 
         // Handle wall flip direction
         if (Input.GetAxis("Horizontal") > 0) // Moving right
         {
-            facingDirection = 1f;
+            _facingDirection = 1f;
             _sr.flipX = false;
         }
         else if (Input.GetAxis("Horizontal") < 0) // Moving left
         {
-            facingDirection = -1f;
+            _facingDirection = -1f;
             _sr.flipX = true;
 
         }
 
         bool IsTouchingWall()
         {
-            float wallCheckDistance = 0.5f;
-            Vector3 direction = new Vector3(facingDirection, 0, 0);
+            float wallCheckDistance = 0.8f;
+            Vector3 direction = new Vector3(_facingDirection, 0, 0);
             // Dray the ray in scene view
             Debug.DrawRay(transform.position, direction * wallCheckDistance, Color.red);
             return Physics.Raycast(transform.position, direction, wallCheckDistance, wallLayer);
@@ -103,15 +106,15 @@ public class PlayerMovement : MonoBehaviour
 
         void WallClimb(float direction)
         {
-            _rb.linearVelocity = new Vector3(_rb.linearVelocity.x, direction * climbSpeed, 0);
+            _rb.linearVelocity = new Vector3(_rb.linearVelocity.x, direction * _climbSpeed, 0);
             _rb.useGravity = false;
         }
 
         void WallJump()
         {
             Vector3 jumpDirection = transform.localScale.x > 0 ? Vector3.left : Vector3.right;
-            _rb.linearVelocity = new Vector3(jumpDirection.x * wallJumpForce, jumpHeight, 0);
-            canWallJump = false; // Reset the ability to wall jump
+            _rb.linearVelocity = new Vector3(jumpDirection.x * _wallJumpForce, _jumpHeight, 0);
+            _canWallJump = false; // Reset the ability to wall jump
         }
     }
 
