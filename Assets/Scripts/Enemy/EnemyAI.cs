@@ -32,13 +32,13 @@ public class EnemyAI : MonoBehaviour
 
         if (_playerDetected)
         {
-            ChasePlayer();
             _playerStats.currentDamage = _playerStats.defaultDamage;
+            ChasePlayer();
         }
         else
         {
-            Patrol();
             _playerStats.currentDamage = _playerStats.defaultDamage * 100;
+            Patrol();
         }
     }
 
@@ -100,13 +100,14 @@ public class EnemyAI : MonoBehaviour
                 }
             }
         }
-
         _playerDetected = false;
     }
 
     void ChasePlayer()
     {
         if (!_player) return;
+        
+        _playerStats.currentDamage = _playerStats.defaultDamage;
 
         _moveSpeed = _enemy.currentMoveSpeed * 1.5f;
         float direction = (_player.position.x > transform.position.x) ? 1f : -1f;

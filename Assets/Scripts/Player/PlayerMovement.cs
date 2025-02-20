@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
+    private static readonly int IsRunning = Animator.StringToHash("isRunning");
+    private static readonly int IsJumping = Animator.StringToHash("isJumping");
     public float speed = 5f;
     public float jumpForce = 7f;
     private bool _isGrounded;
@@ -19,10 +21,13 @@ public class PlayerMovement : MonoBehaviour
     
     private Rigidbody _rb;
     private SpriteRenderer _sr;
+
+    private Animator _anim;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _anim = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody>();
         _sr = GetComponent<SpriteRenderer>();
         _climbSpeed = (3 / 5f * speed);
@@ -39,7 +44,19 @@ public class PlayerMovement : MonoBehaviour
             _sr.flipX = false; // Facing right
         else if (_move < 0)
             _sr.flipX = true; // Facing left
+
+        if (_move != 0)
+        {
+            _anim.SetBool(IsRunning, true);
+        }
+        else
+        {
+            _anim.SetBool(IsRunning, false);
+        }
         
+        _anim.SetBool(IsJumping, !_isGrounded);
+        _anim.SetBool("isClimbing", _isTouchingWall);
+
         // Jumping
     if (Input.GetButtonDown("Jump") && _isGrounded)
         {
@@ -123,6 +140,13 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             _isGrounded = true;
+        }
+    }
+    private void OnCollisionExit(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            _isGrounded = false;
         }
     }
 }
