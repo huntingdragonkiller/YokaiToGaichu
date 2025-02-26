@@ -18,6 +18,9 @@ public class EnemyAI : MonoBehaviour
     private EnemyStats _enemy;
     private bool _playerDetected;
     
+    private bool _isStunned;
+    private float _stunEndTime;
+    
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
@@ -25,20 +28,28 @@ public class EnemyAI : MonoBehaviour
         _player = GameObject.FindGameObjectWithTag("Player")?.transform;  // Find player by tag
         _playerStats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
     }
-
+    
     void FixedUpdate()
     {
-        DetectPlayer();
-
-        if (_playerDetected)
+        if (_isStunned && Time.time >= _stunEndTime)
         {
-            _playerStats.currentDamage = _playerStats.defaultDamage;
-            ChasePlayer();
+            _isStunned = false;
         }
-        else
+        
+        if (!_isStunned)
         {
-            _playerStats.currentDamage = _playerStats.defaultDamage * 100;
-            Patrol();
+            DetectPlayer();
+
+            if (_playerDetected)
+            {
+                _playerStats.currentDamage = _playerStats.defaultDamage;
+                ChasePlayer();
+            }
+            else
+            {
+                _playerStats.currentDamage = _playerStats.defaultDamage * 100;
+                Patrol();
+            }
         }
     }
 
@@ -122,6 +133,23 @@ public class EnemyAI : MonoBehaviour
     {
         _movingRight = !_movingRight;
         transform.Rotate(0, 180, 0);
+    }
+    
+    public void Stun(float duration)
+    {
+        _isStunned = true;
+        _stunEndTime = Time.time + duration;
+        StopEnemyMovement(); // Stops movement when stunned
+    }
+    
+    void StopEnemyMovement()
+    {
+        // If using Rigidbody2D for movement, stop velocity
+        Rigidbody rb = GetComponent<Rigidbody>();
+        if (rb != null)
+        {
+            rb.linearVelocity = Vector2.zero;
+        }
     }
 
     void OnDrawGizmos()

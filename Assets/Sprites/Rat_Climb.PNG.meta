@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a9aa9e3e858526346a2e33c912b8f8f1
+guid: 0e1a1e56be05ef741994267dfd6a150e
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rat_Climb_0
+      name: Climb_0
       rect:
         serializedVersion: 2
-        x: 1321
+        x: 1313
         y: 190
-        width: 798
-        height: 2254
+        width: 808
+        height: 2264
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 828c459b946f4fd459307d703d805322
-      internalID: -1329374293
+      spriteID: e56e87e055efaa241ad9673117de83ca
+      internalID: -138337489
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 69886d93fe59fe54199722b26d0b0c1e
+    spriteID: 110ce473751c72041975c347c4731d5e
     internalID: 0
     vertices: []
     indices: 
@@ -145,7 +145,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Rat_Climb_0: -1329374293
+      Climb_0: -138337489
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

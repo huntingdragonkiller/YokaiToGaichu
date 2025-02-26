@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     private bool _canWallJump;
     private float _lastWallTouchTime;
     private float _facingDirection = 1f; // 1 for right, -1 for left
+    private bool _facingRight = true;
     private bool _isTouchingWall;
     
     private Rigidbody _rb;
@@ -40,10 +41,8 @@ public class PlayerMovement : MonoBehaviour
         // Store movement input
         _move = Input.GetAxis("Horizontal");
 
-        if (_move > 0)
-            _sr.flipX = false; // Facing right
-        else if (_move < 0)
-            _sr.flipX = true; // Facing left
+        SetupDirectionByRotation();
+            
 
         if (_move != 0)
         {
@@ -103,13 +102,10 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetAxis("Horizontal") > 0) // Moving right
         {
             _facingDirection = 1f;
-            _sr.flipX = false;
         }
         else if (Input.GetAxis("Horizontal") < 0) // Moving left
         {
             _facingDirection = -1f;
-            _sr.flipX = true;
-
         }
 
         bool IsTouchingWall()
@@ -147,6 +143,15 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             _isGrounded = false;
+        }
+    }
+
+    private void SetupDirectionByRotation()
+    {
+        if (_move < 0 && _facingRight || _move > 0 && !_facingRight)
+        {
+            _facingRight = !_facingRight;
+            transform.Rotate(new Vector3(0, 180, 0));
         }
     }
 }

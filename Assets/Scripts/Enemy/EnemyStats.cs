@@ -18,16 +18,6 @@ public class EnemyStats : MonoBehaviour
         currentHealth = enemyData.MaxHealth;
         currentDamage = enemyData.Damage;
     }
-
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        
-    }
     
     public void TakeDamage(float dmg)
     {
