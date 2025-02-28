@@ -60,17 +60,29 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: f527c3fc43c016647b5b758e3aaf4d3a, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: f527c3fc43c016647b5b758e3aaf4d3a, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: cd14e3309dbad90488f6ac558b0798d7, type: 2}
+    - target: {fileID: -7511558181221131132, guid: f527c3fc43c016647b5b758e3aaf4d3a, type: 3}
+      propertyPath: 'm_Materials.Array.data[1]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 624bd31733addda4e849c4ab3a21e493, type: 2}
     - target: {fileID: 919132149155446097, guid: f527c3fc43c016647b5b758e3aaf4d3a, type: 3}
       propertyPath: m_Name
       value: straightPipe
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f527c3fc43c016647b5b758e3aaf4d3a, type: 3}
       propertyPath: m_Layer
-      value: 7
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: f527c3fc43c016647b5b758e3aaf4d3a, type: 3}
       propertyPath: m_TagString
-      value: Ground
+      value: Wall
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -104,5 +116,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.06, y: 0.54455376, z: 0.08567382}
+  m_Size: {x: 0.09, y: 0.6, z: 0.08567382}
   m_Center: {x: 0, y: 0, z: 0.000000005587935}
