@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - Wall
   - Destroyable
+  - Grapple
   layers:
   - Default
   - TransparentFX

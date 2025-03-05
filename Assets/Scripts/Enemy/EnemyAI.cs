@@ -35,8 +35,7 @@ public class EnemyAI : MonoBehaviour
         {
             _isStunned = false;
         }
-        
-        if (!_isStunned)
+        else if (!_isStunned)
         {
             DetectPlayer();
 

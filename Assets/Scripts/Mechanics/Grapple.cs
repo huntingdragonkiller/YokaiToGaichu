@@ -2,31 +2,43 @@ using UnityEngine;
 
 public class Grapple : MonoBehaviour
 {
-    private LineRenderer _lr;
-    private Vector3 _grapplePoint;
+    
     public LayerMask grappleLayer;
     public Transform grappleStart, player;
+    public GameObject grappleIndicator;
+    
+    private ActiveObject _activeObject;
+    private LineRenderer _lr;
     private float _maxDistance = 5f;
     private SpringJoint _joint;
-    public GameObject grappleIndicator;
-    private ActiveObject _activeObject;
+    private Vector3 _grapplePoint;
+    private bool _grappleUnlocked;
 
     void Awake()
     {
         _lr = GetComponent<LineRenderer>();
     }
 
+    void Start()
+    {
+        // Load saved unlock state (1 = unlocked, 0 = locked)
+        _grappleUnlocked = PlayerPrefs.GetInt("GrappleUnlocked", 0) == 1;
+    }
+    
     void Update()
     {
-        GrappleIndicator();
+        if (_grappleUnlocked)
+        {
+            GrappleIndicator();
         
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            StartGrapple();
-        }
-        else if (Input.GetKeyUp(KeyCode.E))
-        {
-            StopGrapple();
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                StartGrapple();
+            }
+            else if (Input.GetKeyUp(KeyCode.E))
+            {
+                StopGrapple();
+            }
         }
     }
 
@@ -96,7 +108,13 @@ public class Grapple : MonoBehaviour
                 _activeObject.ToggleOff();
             }
         }
-        
+    }
+
+    public void UnlockGrapple()
+    {
+        _grappleUnlocked = true;
+        PlayerPrefs.SetInt("GrappleUnlocked", 1); // Save unlock state
+        PlayerPrefs.Save();
     }
 
 }
