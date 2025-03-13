@@ -827,9 +827,15 @@ MonoBehaviour:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 9}
+<<<<<<< Updated upstream
     m_SelectedIDs: 04ba0000
     m_LastClickedID: 47620
     m_ExpandedIDs: 0000000014b8000000ca9a3bffffff7f
+=======
+    m_SelectedIDs: 70b60000
+    m_LastClickedID: 46704
+    m_ExpandedIDs: 0000000072b60000
+>>>>>>> Stashed changes
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -858,7 +864,11 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
+<<<<<<< Updated upstream
     m_ExpandedIDs: 0000000014b80000
+=======
+    m_ExpandedIDs: 0000000072b60000
+>>>>>>> Stashed changes
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1602,7 +1612,7 @@ MonoBehaviour:
   m_WindowGUID: cc27987af1a868c49b0894db9c0f5429
   m_Gizmos: 1
   m_OverrideSceneCullingMask: 6917529027641081856
-  m_SceneIsLit: 1
+  m_SceneIsLit: 0
   m_SceneLighting: 1
   m_2DMode: 0
   m_isRotationLocked: 0
@@ -1610,9 +1620,15 @@ MonoBehaviour:
   m_AudioPlay: 0
   m_DebugDrawModesUseInteractiveLightBakingData: 0
   m_Position:
+<<<<<<< Updated upstream
     m_Target: {x: 82.06871, y: 75.40011, z: 0.20077392}
     speed: 2
     m_Value: {x: 82.06871, y: 75.40011, z: 0.20077392}
+=======
+    m_Target: {x: 96.743225, y: 72.67261, z: 34.417576}
+    speed: 2
+    m_Value: {x: 2.5, y: 10.5, z: 0}
+>>>>>>> Stashed changes
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1658,6 +1674,7 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
+<<<<<<< Updated upstream
     m_Target: {x: 0.03151317, y: 0.0096098315, z: -0.00028764442, w: 0.9997239}
     speed: 2
     m_Value: {x: 0.03000623, y: 0.006609141, z: -0.00018312818, w: 0.9995278}
@@ -1665,6 +1682,15 @@ MonoBehaviour:
     m_Target: 26.101952
     speed: 2
     m_Value: 24.977943
+=======
+    m_Target: {x: -0.1200201, y: -0.0008970854, z: 0.00010679145, w: -0.99277693}
+    speed: 2
+    m_Value: {x: -0.107811, y: 0.018778004, z: -0.0020765008, w: -0.9942678}
+  m_Size:
+    m_Target: 66.587234
+    speed: 2
+    m_Value: 7.5332594
+>>>>>>> Stashed changes
   m_Ortho:
     m_Target: 0
     speed: 2
