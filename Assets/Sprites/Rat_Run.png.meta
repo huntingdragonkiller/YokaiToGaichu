@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f8e51ff4a1d2ec74eadea268f11cb4f3
+guid: 7b341b486fd5d59408cb241d4847b4a4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,23 +110,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: JumpFilled_0
+      name: Rat_Run_0
       rect:
         serializedVersion: 2
-        x: 784
-        y: 336
-        width: 1452
-        height: 2021
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 73
+        y: 91
+        width: 1975
+        height: 930
+      alignment: 9
+      pivot: {x: 0.6, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 831594f7b55dd6f46b5801544afe774c
-      internalID: -829160583
+      spriteID: 9342ae337588894428348c7ada59fde3
+      internalID: 1320227781
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rat_Run_1
+      rect:
+        serializedVersion: 2
+        x: 2045
+        y: 27
+        width: 1975
+        height: 930
+      alignment: 9
+      pivot: {x: 0.6, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68ab9d1dd7d1a264185a5610e65f1b75
+      internalID: -140459152
       vertices: []
       indices: 
       edges: []
@@ -135,7 +157,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 835800c93faa0054588b2121e1bda3ef
+    spriteID: 66fa2b5c0f05a57438b9d47a0cf06843
     internalID: 0
     vertices: []
     indices: 
@@ -145,7 +167,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      JumpFilled_0: -829160583
+      Rat_Run_0: 1320227781
+      Rat_Run_1: -140459152
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

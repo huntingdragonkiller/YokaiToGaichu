@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: e0a846cc0f1217543b1982be68a0b663
+guid: 66179581c0a512b4c956acbf43aac97d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,23 +110,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rat_RunRight_0
+      name: Rat_Attack_1
       rect:
         serializedVersion: 2
-        x: 246
-        y: 702
-        width: 2813
-        height: 938
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 11
+        y: 2557
+        width: 1004
+        height: 1042
+      alignment: 9
+      pivot: {x: 0.4, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c55369426ad6ad841b54df433391c71d
-      internalID: -1960508892
+      spriteID: 50bbcc5fe76b3a4409b0a9ea3b3b95d1
+      internalID: 904052852
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rat_Attack_0
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 509
+        width: 816
+        height: 1084
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1d05617bf4b4367419b0aa4f8ce94a79
+      internalID: -515049417
       vertices: []
       indices: 
       edges: []
@@ -135,7 +157,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 6e32205fb8db0594caf16c558ed0356b
+    spriteID: be4b0e1c0657b6f4b9dffd8dae666a6b
     internalID: 0
     vertices: []
     indices: 
@@ -145,7 +167,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Rat_RunRight_0: -1960508892
+      Rat_Attack_0: -515049417
+      Rat_Attack_1: 904052852
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

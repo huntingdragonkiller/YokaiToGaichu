@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 3ef32a0da255c9944af80b31b3e1b1e7
+guid: 285866fa1c6079a41b1c4b07fd328af2
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,13 +110,35 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: IdleRight_0
+      name: Rat_Jump_2
       rect:
         serializedVersion: 2
-        x: 362
-        y: 663
-        width: 2598
-        height: 1037
+        x: 404
+        y: 4374
+        width: 546
+        height: 1526
+      alignment: 9
+      pivot: {x: 0.5, y: 0.6}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a874687b9ca3fe40ad36f94586afcd7
+      internalID: 796204014
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rat_Jump_1
+      rect:
+        serializedVersion: 2
+        x: 44
+        y: 2790
+        width: 936
+        height: 568
       alignment: 9
       pivot: {x: 0.7, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,8 +147,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ac316e62ecb43ca4fb720f609a74a867
-      internalID: -1068636050
+      spriteID: f5e8f6fac67f09446a2d9b453d035dec
+      internalID: 1939915074
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rat_Jump_0
+      rect:
+        serializedVersion: 2
+        x: 80
+        y: 731
+        width: 870
+        height: 725
+      alignment: 9
+      pivot: {x: 0.7, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb9961a27f8b3174594cde1361261227
+      internalID: 1889092687
       vertices: []
       indices: 
       edges: []
@@ -135,7 +179,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: fa047d5b8bbcd7d479935817c971e68b
+    spriteID: 08e4690376b53234791a2054fa7ea3c9
     internalID: 0
     vertices: []
     indices: 
@@ -145,7 +189,9 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      IdleRight_0: -1068636050
+      Rat_Jump_0: 1889092687
+      Rat_Jump_1: 1939915074
+      Rat_Jump_2: 796204014
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

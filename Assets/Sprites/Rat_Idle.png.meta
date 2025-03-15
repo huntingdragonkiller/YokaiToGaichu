@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2e782b76ea3345e40a8c8ea2a414d81d
+guid: ae24b4ba270cd53459781ca44840a18d
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,23 +110,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Rat_AttackRight_0
+      name: Rat_Idle_0
       rect:
         serializedVersion: 2
-        x: 821
-        y: 250
-        width: 1798
-        height: 2256
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        x: 0
+        y: 49
+        width: 1975
+        height: 930
+      alignment: 9
+      pivot: {x: 0.6, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ceb57de806e86ce4f8d370100f7a9d45
-      internalID: 882765943
+      spriteID: 42b82c2c6604bb04eac0b401fcd90fe3
+      internalID: -1714976357
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Rat_Idle_1
+      rect:
+        serializedVersion: 2
+        x: 2047
+        y: 45
+        width: 1975
+        height: 930
+      alignment: 9
+      pivot: {x: 0.6, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ada965cbd38aa5e4289abe527a52d705
+      internalID: 981555914
       vertices: []
       indices: 
       edges: []
@@ -135,7 +157,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: e98693ff6e84f1747af41b7ae7d62f46
+    spriteID: 6ebda67d6ee35c746b85d044f44d4940
     internalID: 0
     vertices: []
     indices: 
@@ -145,9 +167,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Rat_AttackRight_0: 882765943
-      Rat_AttackRight_1: -1041264542
-      Rat_AttackRight_2: 418939295
+      Rat_Idle_0: -1714976357
+      Rat_Idle_1: 981555914
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
