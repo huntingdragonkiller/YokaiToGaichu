@@ -10,7 +10,7 @@ public class PlayerAttack : MonoBehaviour
     public float attackDuration = 0.2f;
 
     private bool isAttacking = false;
-    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -34,7 +34,7 @@ public class PlayerAttack : MonoBehaviour
         slashEffect.SetActive(true);
 
         yield return new WaitForSeconds(attackDuration);
-        
+
         attackHitbox.enabled = false;
         slashEffect.SetActive(false);
         isAttacking = false;
