@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
@@ -20,6 +21,9 @@ public class EnemyAI : MonoBehaviour
     
     private bool _isStunned;
     private float _stunEndTime;
+    
+    public float patrolPauseDuration = 2f;
+    private bool _isPaused = false;
     
     void Start()
     {
@@ -54,6 +58,12 @@ public class EnemyAI : MonoBehaviour
 
     void Patrol()
     {
+        if (_isPaused)
+        {
+            _rb.linearVelocity = new Vector3(0, _rb.linearVelocity.y, 0);
+            return;
+        }
+        
         _moveSpeed = _enemy.currentMoveSpeed;
         float moveDirection = _movingRight ? 1f : -1f;
         _rb.linearVelocity = new Vector3(_moveSpeed * moveDirection, _rb.linearVelocity.y, 0);
@@ -61,11 +71,11 @@ public class EnemyAI : MonoBehaviour
         // Check if the enemy reached a patrol point
         if (_movingRight && transform.position.x >= rightPatrolPoint.position.x)
         {
-            Flip();
+            StartCoroutine(PauseAtPatrolPoint());
         }
         else if (!_movingRight && transform.position.x <= leftPatrolPoint.position.x)
         {
-            Flip();
+            StartCoroutine(PauseAtPatrolPoint());
         }
 
         // Check for walls using a raycast
@@ -149,6 +159,15 @@ public class EnemyAI : MonoBehaviour
         {
             rb.linearVelocity = Vector2.zero;
         }
+    }
+    
+    IEnumerator PauseAtPatrolPoint()
+    {
+        _isPaused = true;
+        _rb.linearVelocity = Vector3.zero;  // Stop moving while paused
+        yield return new WaitForSeconds(patrolPauseDuration);
+        Flip();  // Flip direction after pause
+        _isPaused = false;
     }
 
     void OnDrawGizmos()

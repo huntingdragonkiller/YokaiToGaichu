@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Grapple : MonoBehaviour
 {
@@ -12,7 +13,8 @@ public class Grapple : MonoBehaviour
     private float _maxDistance = 5f;
     private SpringJoint _joint;
     private Vector3 _grapplePoint;
-    private bool _grappleUnlocked;
+    [HideInInspector]
+    public bool grappleUnlocked;
 
     void Awake()
     {
@@ -21,13 +23,14 @@ public class Grapple : MonoBehaviour
 
     void Start()
     {
+        Debug.Log(grappleUnlocked);
         // Load saved unlock state (1 = unlocked, 0 = locked)
-        _grappleUnlocked = PlayerPrefs.GetInt("GrappleUnlocked", 0) == 1;
+        grappleUnlocked = PlayerPrefs.GetInt("GrappleUnlocked", 0) == 1;
     }
     
     void Update()
     {
-        if (_grappleUnlocked)
+        if (grappleUnlocked)
         {
             GrappleIndicator();
         
@@ -112,7 +115,7 @@ public class Grapple : MonoBehaviour
 
     public void UnlockGrapple()
     {
-        _grappleUnlocked = true;
+        grappleUnlocked = true;
         PlayerPrefs.SetInt("GrappleUnlocked", 1); // Save unlock state
         PlayerPrefs.Save();
     }

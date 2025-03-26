@@ -8,6 +8,10 @@ TagManager:
   - Enemy
   - Wall
   - Destroyable
+  - Grapple
+  - GameManager
+  - FadeIn
+  - DeathMenu
   layers:
   - Default
   - TransparentFX

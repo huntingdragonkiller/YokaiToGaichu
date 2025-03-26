@@ -17,8 +17,18 @@ public class FadeOut : MonoBehaviour
 
     void Update()
     {
-        if(currentScene != SceneManager.GetActiveScene())
-            StartCoroutine(FadeScreen(0f));
+        if (currentScene != SceneManager.GetActiveScene() && fadeCanvas.alpha > 0f)
+        {
+            StartCoroutine(SceneTransition());
+        }
+            
+    }
+
+    IEnumerator SceneTransition()
+    {
+        yield return StartCoroutine(FadeScreen(0f));
+            
+        currentScene = SceneManager.GetActiveScene();
     }
     
     IEnumerator FadeScreen(float targetAlpha)

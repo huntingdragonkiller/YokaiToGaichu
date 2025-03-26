@@ -4,26 +4,31 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     private PlayerStats _player;
-
+    private GameManager _gameManager;
     public GameObject slashEffect;
     public Collider attackHitbox;
-    public float attackDuration = 0.2f;
+    public float attackDuration = 0.05f;
 
-    private bool isAttacking = false;
-
+    public static bool isAttacking = false;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _player = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
+        _gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Mouse0) && !isAttacking)
+        if (_gameManager.isPaused == false)
         {
-            StartCoroutine(PerformAttack());
+            if (Input.GetKeyDown(KeyCode.Mouse0) && !isAttacking)
+            {
+                StartCoroutine(PerformAttack());
+            }
         }
+        
     }
 
     private IEnumerator PerformAttack()
