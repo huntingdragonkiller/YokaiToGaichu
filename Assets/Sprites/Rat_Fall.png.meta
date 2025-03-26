@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f37b23efbccb3d24791a230ceb38fd9e
+guid: f4d804b1394178c48914458e6ab23103
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 100
+  spritePixelsToUnits: 512
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Bar_0
+      name: Rat_Fall_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 52
-        height: 9
+        x: 131
+        y: 160
+        width: 761
+        height: 681
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,8 +125,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0fc6e7462efd8df4bb73b921203dc640
-      internalID: -1297351073
+      spriteID: f05e4bf0d1fa8724e9e17c501799616b
+      internalID: -2049221879
       vertices: []
       indices: 
       edges: []
@@ -135,7 +135,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 67f8a9bbb9b40534f932307608e3dbb1
+    spriteID: 7fbba776cd5f2a6408cb1b66630b3f0a
     internalID: 0
     vertices: []
     indices: 
@@ -145,7 +145,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Bar_0: -1297351073
+      Rat_Fall_0: -2049221879
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

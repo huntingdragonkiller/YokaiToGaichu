@@ -6,7 +6,10 @@ public class PlayerMovement : MonoBehaviour
     private static readonly int IsRunning = Animator.StringToHash("isRunning");
     private static readonly int IsJumping = Animator.StringToHash("isJumping");
     private static readonly int IsClimbing = Animator.StringToHash("isClimbing");
-    
+    private static readonly int IsAttacking = Animator.StringToHash("isAttacking");
+    private static readonly int IsIdle = Animator.StringToHash("isIdle");
+    private static readonly int IsFalling = Animator.StringToHash("isFalling");
+
     [Header("Movement settings")]
     public float speed = 5f;
     public float jumpForce = 7f;
@@ -14,41 +17,43 @@ public class PlayerMovement : MonoBehaviour
     private bool _onWall;
     private bool _isJumping;
     private float _move;
+    private float _moveY;
     private bool _facingRight = true;
     
-    public LayerMask wallLayer;
-    private float _climbSpeed;
+    [Header("Jump settings")]
+    public float climbSpeed;
     private float _wallJumpForce;
-    private float _jumpHeight;
-    
-    
-    private float _facingDirection = 1f; // 1 for right, -1 for left
-    private bool _isTouchingWall;
-    
+    public float jumpHeight;
+    public LayerMask wallLayer;
     // Coyote time
     public float wallJumpTime = 0.5f;  // Time window to allow wall jumping
     private float _wallJumpTimer;
+    private bool _isTouchingWall;
     
+    private bool _isAttacking;
+    private float _fallingThreshold = -1f;
+    private bool _isFalling;
+    
+    private float _facingDirection = 1f; // 1 for right, -1 for left
     private SpriteRenderer _sr;
     private Rigidbody _rb;
-
     private Animator _anim;
-    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         _anim = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody>();
         _sr = GetComponent<SpriteRenderer>();
-        _climbSpeed = (3 / 5f * speed);
         _wallJumpForce = speed;
-        _jumpHeight = jumpForce;
     }
 
     void Update()
     {
+        _isAttacking = PlayerAttack.isAttacking;
         // Store movement input
         _move = Input.GetAxis("Horizontal");
+        _moveY = Input.GetAxis("Vertical");
 
         SetupDirectionByRotation();
         
@@ -61,6 +66,17 @@ public class PlayerMovement : MonoBehaviour
             _anim.SetBool(IsRunning, false);
         }
         
+        if (_moveY != 0)
+        {
+            _anim.SetBool(IsIdle, false);
+        }
+        else
+        {
+            _anim.SetBool(IsIdle, true);
+        }
+
+        
+        _anim.SetBool(IsAttacking, _isAttacking);
         _anim.SetBool(IsJumping, _isJumping);
         _anim.SetBool(IsClimbing, _onWall);
 
@@ -90,21 +106,17 @@ public class PlayerMovement : MonoBehaviour
         _isTouchingWall = IsTouchingWall();
         if (_isTouchingWall)
         {
+            _onWall = true;
+            _rb.useGravity = false;
             _wallJumpTimer = wallJumpTime;
+            _rb.linearVelocity = new Vector3(_rb.linearVelocity.x, _moveY * climbSpeed, 0);
             if (Input.GetKey(KeyCode.W)) // Climb up with W
             {
-                WallClimb(1f); // Move Up
                 _sr.flipY = false;
             }
             else if (Input.GetKey(KeyCode.S)) // Climb down with S
             {
-                WallClimb(-1f); // Move down
                 _sr.flipY = true;
-            }
-            else
-            {
-                // If no input, stop vertical movement
-                _rb.linearVelocity = new Vector3(_rb.linearVelocity.x, 0, 0);
             }
         }
         else
@@ -116,10 +128,7 @@ public class PlayerMovement : MonoBehaviour
         }
         
         if (Input.GetKeyDown(KeyCode.Space) && (_wallJumpTimer > 0))
-        {
-            Debug.Log("Space is pressed in the air");
             WallJump();
-        }
         
         // Handle wall flip direction
         if (Input.GetAxis("Horizontal") > 0) // Moving right
@@ -130,6 +139,14 @@ public class PlayerMovement : MonoBehaviour
         {
             _facingDirection = -1f;
         }
+        
+        // Falling
+        if (_rb.linearVelocity.y < _fallingThreshold)
+            _isFalling = true;
+        else 
+            _isFalling = false;
+        _anim.SetBool(IsFalling, _isFalling);
+        
 
         bool IsTouchingWall()
         {
@@ -140,19 +157,11 @@ public class PlayerMovement : MonoBehaviour
             return Physics.Raycast(transform.position, direction, wallCheckDistance, wallLayer);
         }
 
-        void WallClimb(float direction)
-        {
-            _rb.linearVelocity = new Vector3(_rb.linearVelocity.x, direction * _climbSpeed, 0);
-            _rb.useGravity = false;
-        }
-
         void WallJump()
         {
             Vector3 jumpDirection = transform.localScale.x > 0 ? Vector3.left : Vector3.right;
-            _rb.linearVelocity = new Vector3(jumpDirection.x * _wallJumpForce, _jumpHeight, 0);
+            _rb.linearVelocity = new Vector3(jumpDirection.x * _wallJumpForce, jumpHeight, 0);
         }
-        
-        Debug.Log(_wallJumpTimer);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -180,10 +189,29 @@ public class PlayerMovement : MonoBehaviour
 
     private void SetupDirectionByRotation()
     {
-        if (_move < 0 && _facingRight || _move > 0 && !_facingRight)
+        if (_move < 0f)
         {
-            _facingRight = !_facingRight;
-            transform.Rotate(new Vector3(0, 180, 0));
+            _facingRight = false;
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+
+        if (_move > 0f)
+        {
+            _facingRight = true;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+
+        if (_move == 0f)
+        {
+            switch (_facingRight)
+            {
+                case true:
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                    break;
+                case false:
+                    transform.rotation = Quaternion.Euler(0, 180, 0);
+                    break;
+            }
         }
     }
 }

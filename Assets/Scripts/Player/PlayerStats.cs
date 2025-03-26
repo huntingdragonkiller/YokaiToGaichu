@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -9,25 +10,27 @@ public class PlayerStats : MonoBehaviour
     public float maxHealth;
     public float defaultDamage;
     private float _currentHealth;
-    [FormerlySerializedAs("_currentDamage")] [HideInInspector]
+    [HideInInspector]
     public float currentDamage;
     
     [Header("UI Elements")]
-    public HealthBar healthBar;
-    
-    
+    public Image[] hearts;
+    public Sprite fullHeart;
+    public Sprite emptyHeart;
 
     //I-Frames
     [Header("I-Frames")]
     public float invincibilityDuration;
     float _invincibilityTimer;
     private bool _isInvincible;
+
+    private GameManager _gameManager;
     
     void Start()
     {
         _currentHealth = maxHealth;
         currentDamage = defaultDamage;
-        healthBar.SetMaxHealth(_currentHealth);
+        _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
     void Update()
@@ -43,7 +46,18 @@ public class PlayerStats : MonoBehaviour
         }
 
         //Recover();
-        healthBar.SetHealth(_currentHealth);
+
+        for (int i = 0; i < hearts.Length; i++)
+        {
+            if (i < _currentHealth)
+                hearts[i].sprite = fullHeart;
+            else
+                hearts[i].sprite = emptyHeart;
+            if (i < maxHealth)
+                hearts[i].enabled = true;
+            else
+                hearts[i].enabled = false;
+        }
     }
     public void TakeDamage(float dmg)
     {
@@ -65,18 +79,11 @@ public class PlayerStats : MonoBehaviour
     public void Kill()
     {
         Debug.Log("PLAYER IS DEAD");
-        Destroy(gameObject);
+        _gameManager.PlayerDeath();
     }
 
-    void Recover()
+    public void ResetStats()
     {
-        if (_currentHealth < maxHealth)
-        {
-            // Make sure the player's health doesn't exceed their max health
-            if (_currentHealth > maxHealth)
-            {
-                _currentHealth = maxHealth;
-            }
-        }
+        _currentHealth = maxHealth;
     }
 }

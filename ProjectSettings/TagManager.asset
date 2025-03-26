@@ -11,7 +11,7 @@ TagManager:
   - Grapple
   - GameManager
   - FadeIn
-  - FadeOut
+  - DeathMenu
   layers:
   - Default
   - TransparentFX

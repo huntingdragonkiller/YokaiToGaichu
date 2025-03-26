@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 651d3199b85ffd14cbbb2ce4ee0b44ab
+guid: c8099821f6a19934195be76edf70b478
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -34,7 +34,7 @@ TextureImporter:
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
-    filterMode: 1
+    filterMode: 0
     aniso: 1
     mipBias: 0
     wrapU: 1
@@ -48,7 +48,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 1024
+  spritePixelsToUnits: 20
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -110,13 +110,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Frog_0
+      name: Heart_0
       rect:
         serializedVersion: 2
-        x: 542
-        y: 565
-        width: 1954
-        height: 1482
+        x: 0
+        y: 0
+        width: 200
+        height: 180
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -125,8 +125,30 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 06cbbc5e052ed7c46a26576941bfd905
-      internalID: -244541878
+      spriteID: 8ad4c3c809a6a6f4d9924cec2bcd87ef
+      internalID: -1374074797
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Heart_1
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 0
+        width: 200
+        height: 180
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2c091062ea2d3dc4a8d27ae8637eadba
+      internalID: 481237408
       vertices: []
       indices: 
       edges: []
@@ -135,7 +157,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: f68df2e43ca7f114eb8071ebc39769e4
+    spriteID: 0b951570015508d4dbbe0781b9ea3498
     internalID: 0
     vertices: []
     indices: 
@@ -145,7 +167,8 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Frog_0: -244541878
+      Heart_0: -1374074797
+      Heart_1: 481237408
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

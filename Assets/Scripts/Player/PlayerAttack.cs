@@ -7,9 +7,9 @@ public class PlayerAttack : MonoBehaviour
     private GameManager _gameManager;
     public GameObject slashEffect;
     public Collider attackHitbox;
-    public float attackDuration = 0.2f;
+    public float attackDuration = 0.05f;
 
-    private bool isAttacking = false;
+    public static bool isAttacking = false;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
