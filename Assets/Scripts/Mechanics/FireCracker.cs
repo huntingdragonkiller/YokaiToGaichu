@@ -2,11 +2,15 @@ using UnityEngine;
 
 public class FireCracker : MonoBehaviour
 {
+    [Header("Fire Cracker Stats")]
     public float explosionRadius = 2f;
     public float fuseTime = 2f;
     public float stunDuration = 2f;
+    
+    [Header("Destroyable Layer")]
     public LayerMask destroyableLayer; // Assign this in the Inspector
-
+    
+    [Header("Effects")]
     public GameObject explosionEffect; // Optional, for visual effect
 
     void Start()

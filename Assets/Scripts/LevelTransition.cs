@@ -6,18 +6,14 @@ public class LevelTransition : MonoBehaviour
 {
     public string nextSceneName; // Name of the next scene to load
     public float fadeDuration = 1f;
-    private CanvasGroup fadeCanvas; // UI Canvas Group for fading
-
-    void Start()
-    {
-        fadeCanvas = GameObject.FindGameObjectWithTag("FadeIn").GetComponent<CanvasGroup>();
-        Debug.Log(fadeCanvas.name);
-    }
+    private CanvasGroup _fadeCanvas; // UI Canvas Group for fading
     
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
+            _fadeCanvas = GameObject.FindGameObjectWithTag("FadeIn").GetComponent<CanvasGroup>();
+            Debug.Log(_fadeCanvas);
             StartCoroutine(TransitionToNextLevel());
         }
     }
@@ -59,16 +55,16 @@ public class LevelTransition : MonoBehaviour
     
     IEnumerator FadeScreen(float targetAlpha)
     {
-        float startAlpha = fadeCanvas.alpha;
+        float startAlpha = _fadeCanvas.alpha;
         float elapsedTime = 0f;
 
         while (elapsedTime < fadeDuration)
         {
-            fadeCanvas.alpha = Mathf.Lerp(startAlpha, targetAlpha, elapsedTime / fadeDuration);
+            _fadeCanvas.alpha = Mathf.Lerp(startAlpha, targetAlpha, elapsedTime / fadeDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        fadeCanvas.alpha = targetAlpha;
+        _fadeCanvas.alpha = targetAlpha;
     }
 }
