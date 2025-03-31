@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     [Header("Movement settings")]
     public float speed = 5f;
     public float jumpForce = 7f;
+    public float gravity = -9.81f;
     private bool _isGrounded;
     private bool _onWall;
     private bool _isJumping;
@@ -56,6 +57,9 @@ public class PlayerMovement : MonoBehaviour
         _moveY = Input.GetAxis("Vertical");
 
         SetupDirectionByRotation();
+        
+        // Gravity
+        _rb.linearVelocity = new Vector3(_rb.linearVelocity.x, _rb.linearVelocity.y - (gravity * Time.deltaTime), 0);
         
         if (_move != 0)
         {
@@ -107,7 +111,6 @@ public class PlayerMovement : MonoBehaviour
         if (_isTouchingWall)
         {
             _onWall = true;
-            _rb.useGravity = false;
             _wallJumpTimer = wallJumpTime;
             _rb.linearVelocity = new Vector3(_rb.linearVelocity.x, _moveY * climbSpeed, 0);
             if (Input.GetKey(KeyCode.W)) // Climb up with W
@@ -121,7 +124,6 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            _rb.useGravity = true;
             _wallJumpTimer -= Time.deltaTime;
             if(_wallJumpTimer <= 0)
                 _wallJumpTimer = 0;
@@ -162,8 +164,6 @@ public class PlayerMovement : MonoBehaviour
             Vector3 jumpDirection = transform.localScale.x > 0 ? Vector3.left : Vector3.right;
             _rb.linearVelocity = new Vector3(jumpDirection.x * _wallJumpForce, jumpHeight, 0);
         }
-        
-        Debug.Log(_wallJumpTimer);
     }
 
     private void OnCollisionEnter(Collision collision)

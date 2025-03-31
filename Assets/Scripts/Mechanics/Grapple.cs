@@ -23,7 +23,6 @@ public class Grapple : MonoBehaviour
 
     void Start()
     {
-        Debug.Log(grappleUnlocked);
         // Load saved unlock state (1 = unlocked, 0 = locked)
         grappleUnlocked = PlayerPrefs.GetInt("GrappleUnlocked", 0) == 1;
     }
