@@ -3176,11 +3176,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97d959554795b9b4f888759ff4058c5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
-  jumpForce: 20
+  speed: 9
+  jumpForce: 18
   gravity: 30
-  climbSpeed: 10
-  jumpHeight: 10
+  climbSpeed: 9
+  jumpHeight: 15
   wallLayer:
     serializedVersion: 2
     m_Bits: 64
