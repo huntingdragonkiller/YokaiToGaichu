@@ -25,8 +25,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2381831452778110443, guid: e9d2e8f77e5c28e49b71e7e97d9ff128, type: 3}
+      propertyPath: speed
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2381831452778110443, guid: e9d2e8f77e5c28e49b71e7e97d9ff128, type: 3}
       propertyPath: jumpForce
-      value: 9
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 2381831452778110443, guid: e9d2e8f77e5c28e49b71e7e97d9ff128, type: 3}
+      propertyPath: climbSpeed
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2381831452778110443, guid: e9d2e8f77e5c28e49b71e7e97d9ff128, type: 3}
+      propertyPath: jumpHeight
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8517567363652386919, guid: e9d2e8f77e5c28e49b71e7e97d9ff128, type: 3}
       propertyPath: m_LocalScale.x
