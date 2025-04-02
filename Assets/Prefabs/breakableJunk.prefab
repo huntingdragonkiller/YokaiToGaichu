@@ -22,15 +22,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 142d01185bbdca14fa94fefc4f871c1a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 93.8
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 142d01185bbdca14fa94fefc4f871c1a, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 101.05
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 142d01185bbdca14fa94fefc4f871c1a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.0017401
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 142d01185bbdca14fa94fefc4f871c1a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -74,7 +74,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 624bd31733addda4e849c4ab3a21e493, type: 2}
     - target: {fileID: 919132149155446097, guid: 142d01185bbdca14fa94fefc4f871c1a, type: 3}
       propertyPath: m_Name
-      value: breakableJunk 1
+      value: breakableJunk
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 142d01185bbdca14fa94fefc4f871c1a, type: 3}
       propertyPath: m_Layer
