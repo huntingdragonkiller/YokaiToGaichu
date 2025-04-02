@@ -57,6 +57,11 @@ public class GameManager : MonoBehaviour
         //player.GetComponent<PlayerCheckpoint>().Respawn();
     }
 
+    public void Menu()
+    {
+        SceneManager.LoadScene(0);
+    }
+
     public void PlayerDeath()
     {
         player.GetComponent<PlayerCheckpoint>().Respawn();

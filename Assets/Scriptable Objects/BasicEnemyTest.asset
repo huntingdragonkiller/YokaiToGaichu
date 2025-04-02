@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad018379b42968e469fad3be5bd37d71, type: 3}
   m_Name: BasicEnemyTest
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 5
   maxHealth: 100
   damage: 1
