@@ -3177,10 +3177,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 9
-  jumpForce: 18
+  jumpForce: 16
   gravity: 30
   climbSpeed: 9
-  jumpHeight: 15
+  jumpHeight: 16
   wallLayer:
     serializedVersion: 2
     m_Bits: 64

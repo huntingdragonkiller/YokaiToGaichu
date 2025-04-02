@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class MenuManager : MonoBehaviour
 {
     public string sceneName;
+    public string testScene;
     
     public void GameStart()
     {

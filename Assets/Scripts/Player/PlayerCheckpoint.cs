@@ -10,6 +10,12 @@ public class PlayerCheckpoint : MonoBehaviour
         _respawnPoint = transform.position;
     }
 
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.L))
+            Respawn();
+    }
+
     public void SetCheckpoint(Vector3 newCheckpoint)
     {
         _respawnPoint = newCheckpoint;
@@ -18,5 +24,6 @@ public class PlayerCheckpoint : MonoBehaviour
     public void Respawn()
     {
         transform.position = _respawnPoint;
+        Debug.Log("Respawn");
     }
 }

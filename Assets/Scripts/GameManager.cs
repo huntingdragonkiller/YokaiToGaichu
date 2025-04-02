@@ -49,16 +49,17 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
+        Time.timeScale = 1;
         deathMenu.SetActive(false);
         player.SetActive(true);
-        player.GetComponent<PlayerCheckpoint>().Respawn();
-        player.GetComponent<PlayerStats>().ResetStats();
-        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        player.GetComponent<PlayerStats>().ResetStats();
+        //player.GetComponent<PlayerCheckpoint>().Respawn();
     }
 
     public void PlayerDeath()
     {
+        player.GetComponent<PlayerCheckpoint>().Respawn();
         player.SetActive(false);
         deathMenu.SetActive(true);
         fadeCanvas = GameObject.FindGameObjectWithTag("DeathMenu").GetComponent<CanvasGroup>();
