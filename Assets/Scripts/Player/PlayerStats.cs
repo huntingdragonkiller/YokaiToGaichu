@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
@@ -71,15 +68,9 @@ public class PlayerStats : MonoBehaviour
             
             if (_currentHealth <= 0)
             {
-                Kill();
+                _gameManager.PlayerDeath();
             }
         }
-    }
-
-    public void Kill()
-    {
-        Debug.Log("PLAYER IS DEAD");
-        _gameManager.PlayerDeath();
     }
 
     public void ResetStats()

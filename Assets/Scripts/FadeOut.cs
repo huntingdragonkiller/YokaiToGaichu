@@ -21,6 +21,11 @@ public class FadeOut : MonoBehaviour
         {
             StartCoroutine(SceneTransition());
         }
+
+        if (fadeCanvas.alpha == 1f)
+        {
+            StartCoroutine(FadeScreen(0f));
+        }
             
     }
 

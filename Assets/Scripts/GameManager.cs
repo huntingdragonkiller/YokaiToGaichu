@@ -26,20 +26,28 @@ public class GameManager : MonoBehaviour
             else
                 Unpause();
         }
+
+        if (isPaused == false && !deathMenu.activeSelf)
+        {
+            Time.timeScale = 1f;
+        }
+
+        if (isPaused)
+        {
+            Time.timeScale = 0f;
+        }
     }
 
     public void Unpause()
     {
         pauseMenu.SetActive(false);
         isPaused = false;
-        Time.timeScale = 1;
     }
 
     public void Pause()
     {
         pauseMenu.SetActive(true);
         isPaused = true;
-        Time.timeScale = 0;
     }
 
     public void QuitGame()
@@ -49,17 +57,16 @@ public class GameManager : MonoBehaviour
 
     public void Restart()
     {
-        Time.timeScale = 1;
         deathMenu.SetActive(false);
         player.SetActive(true);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         player.GetComponent<PlayerStats>().ResetStats();
-        //player.GetComponent<PlayerCheckpoint>().Respawn();
     }
 
     public void Menu()
     {
         SceneManager.LoadScene(0);
+        Time.timeScale = 1;
     }
 
     public void PlayerDeath()
@@ -77,7 +84,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
     }
     
-    IEnumerator FadeScreen(float targetAlpha)
+    public IEnumerator FadeScreen(float targetAlpha)
     {
         float startAlpha = fadeCanvas.alpha;
         float elapsedTime = 0f;
