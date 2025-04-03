@@ -12,6 +12,7 @@ TagManager:
   - GameManager
   - FadeIn
   - DeathMenu
+  - WinMenu
   layers:
   - Default
   - TransparentFX

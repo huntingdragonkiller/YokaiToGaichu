@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 {
     public GameObject pauseMenu;
     public GameObject deathMenu;
+    public GameObject winMenu;
     public  bool isPaused;
     public GameObject player;
     
@@ -19,7 +20,7 @@ public class GameManager : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && !deathMenu.activeSelf)
+        if (Input.GetKeyDown(KeyCode.Escape) && !deathMenu.activeSelf && !winMenu.activeSelf)
         {
             if(!isPaused)
                 Pause();
@@ -27,12 +28,12 @@ public class GameManager : MonoBehaviour
                 Unpause();
         }
 
-        if (isPaused == false && !deathMenu.activeSelf)
+        if (isPaused == false && !deathMenu.activeSelf && !winMenu.activeSelf)
         {
             Time.timeScale = 1f;
         }
 
-        if (isPaused && !deathMenu.activeSelf)
+        if (isPaused && !deathMenu.activeSelf && !winMenu.activeSelf)
         {
             Time.timeScale = 0f;
         }
@@ -86,6 +87,12 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 0;
     }
     
+    IEnumerator WinTransition()
+    {
+        yield return StartCoroutine(FadeScreen(1f));
+        Time.timeScale = 0;
+    }
+    
     public IEnumerator FadeScreen(float targetAlpha)
     {
         float startAlpha = fadeCanvas.alpha;
@@ -99,5 +106,13 @@ public class GameManager : MonoBehaviour
         }
 
         fadeCanvas.alpha = targetAlpha;
+    }
+
+    public void WinGame()
+    {
+        isPaused = true;
+        winMenu.SetActive(true);
+        fadeCanvas = GameObject.FindGameObjectWithTag("WinMenu").GetComponent<CanvasGroup>();
+        StartCoroutine(WinTransition());
     }
 }

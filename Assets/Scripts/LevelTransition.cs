@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -7,7 +8,13 @@ public class LevelTransition : MonoBehaviour
     public string nextSceneName; // Name of the next scene to load
     public float fadeDuration = 1f;
     private CanvasGroup _fadeCanvas; // UI Canvas Group for fading
-    
+    private GameManager _gameManager;
+
+    private void Start()
+    {
+        _gameManager = GameObject.FindWithTag("GameManager").GetComponent<GameManager>();
+    }
+
     void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
@@ -26,14 +33,14 @@ public class LevelTransition : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("Next scene name not set!");
+            WinGame();
         }
     }
 
     void WinGame()
     {
         Debug.Log("Game Won!");
-        Application.Quit();
+        _gameManager.WinGame();
         // Add win logic here, such as showing a UI screen or triggering an event
     }
     
