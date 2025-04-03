@@ -15,6 +15,7 @@ public class FireCracker : MonoBehaviour
 
     public AudioClip throwSound;
     public AudioClip explodeSound;
+    public AudioClip destroySound;
 
     void Start()
     {
@@ -37,6 +38,7 @@ public class FireCracker : MonoBehaviour
             // Destroy objects with the "Destroyable" tag
             if (obj.CompareTag("Destroyable"))
             {
+                AudioManager.instance.PlaySound(destroySound, transform, 1f);
                 Destroy(obj.gameObject);
             }
             

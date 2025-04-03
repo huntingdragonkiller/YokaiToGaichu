@@ -23,7 +23,7 @@ public class EnemyAI : MonoBehaviour
     private float _stunEndTime;
     
     public float patrolPauseDuration = 2f;
-    private bool _isPaused = false;
+    private bool _isPaused;
 
     public AudioClip alertSound;
     private bool _soundPlayed;
@@ -147,7 +147,30 @@ public class EnemyAI : MonoBehaviour
     void Flip()
     {
         _movingRight = !_movingRight;
-        transform.Rotate(0, 180, 0);
+        if (_rb.linearVelocity.x > 0)
+        {
+            //_movingRight = true;
+            transform.rotation = Quaternion.Euler(0, 0, 0);
+        }
+        else if (!_movingRight)
+        {
+            //_movingRight = false;
+            transform.rotation = Quaternion.Euler(0, 180, 0);
+        }
+        //transform.Rotate(0, 180, 0);
+
+        if (_rb.linearVelocity.x == 0)
+        {
+            switch (_movingRight)
+            {
+                case true:
+                    transform.rotation = Quaternion.Euler(0, 0, 0);
+                    break;
+                case false:
+                    transform.rotation = Quaternion.Euler(0, 180, 0);
+                    break;
+            }
+        }
     }
     
     public void Stun(float duration)
@@ -163,7 +186,7 @@ public class EnemyAI : MonoBehaviour
         Rigidbody rb = GetComponent<Rigidbody>();
         if (rb != null)
         {
-            rb.linearVelocity = Vector2.zero;
+            rb.linearVelocity = Vector3.zero;
         }
     }
     
