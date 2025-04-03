@@ -157,6 +157,9 @@ MonoBehaviour:
   groundLayer:
     serializedVersion: 2
     m_Bits: 192
+  jumpForce: 3
+  forwardForce: 5
+  jumpCooldown: 2
   visionRange: 5
   visionAngle: 45
   visionOrigin: {fileID: 6643505868236203153}

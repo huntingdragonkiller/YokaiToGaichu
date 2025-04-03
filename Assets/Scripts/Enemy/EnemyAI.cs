@@ -3,15 +3,21 @@ using UnityEngine;
 
 public class EnemyAI : MonoBehaviour
 {
+    private static readonly int IsMoving = Animator.StringToHash("isMoving");
     public Transform leftPatrolPoint, rightPatrolPoint;
     public LayerMask groundLayer;
 
+    [Header("Jump Settings")]
+    public float jumpForce = 3f; // Vertical force for jump
+    public float forwardForce = 5f; // Forward force for jump
+    public float jumpCooldown = 2f; // Time between jumps
+    private bool _isJumping;
+    
     [Header("Vision Settings")]
     public float visionRange = 5f;
     public float visionAngle = 45f; // Angle of vision cone
     public Transform visionOrigin;  // Position where the enemy "sees"
     
-    private float _moveSpeed;
     private Rigidbody _rb;
     private bool _movingRight = true;
     private Transform _player;
@@ -28,12 +34,18 @@ public class EnemyAI : MonoBehaviour
     public AudioClip alertSound;
     private bool _soundPlayed;
     
+    private Animator _animator;
+    private bool _isMoving;
+    
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
         _enemy = GetComponent<EnemyStats>();
         _player = GameObject.FindGameObjectWithTag("Player")?.transform;  // Find player by tag
         _playerStats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
+        _animator = GetComponent<Animator>();
+
+        StartCoroutine(JumpRoutine());
     }
     
     void Update()
@@ -48,48 +60,25 @@ public class EnemyAI : MonoBehaviour
 
             if (_playerDetected)
             {
-                
                 _playerStats.currentDamage = _playerStats.defaultDamage;
                 ChasePlayer();
             }
             else
             {
+                jumpCooldown = 2f;
                 _playerStats.currentDamage = _playerStats.defaultDamage * 100;
-                Patrol();
             }
         }
-    }
 
-    void Patrol()
-    {
-        if (_isPaused)
-        {
-            _rb.linearVelocity = new Vector3(0, _rb.linearVelocity.y, 0);
-            return;
-        }
+        if (_rb.linearVelocity.x is > 0 or < 0)
+            _isMoving = true;
+        else if (_rb.angularVelocity.x == 0)
+            _isMoving = false;
         
-        _moveSpeed = _enemy.currentMoveSpeed;
-        float moveDirection = _movingRight ? 1f : -1f;
-        _rb.linearVelocity = new Vector3(_moveSpeed * moveDirection, _rb.linearVelocity.y, 0);
-
-        // Check if the enemy reached a patrol point
-        if (_movingRight && transform.position.x >= rightPatrolPoint.position.x)
-        {
-            StartCoroutine(PauseAtPatrolPoint());
-        }
-        else if (!_movingRight && transform.position.x <= leftPatrolPoint.position.x)
-        {
-            StartCoroutine(PauseAtPatrolPoint());
-        }
-
-        // Check for walls using a raycast
-        Vector3 direction = _movingRight ? Vector3.right : Vector3.left;
-        if (Physics.Raycast(transform.position, direction, 0.5f, groundLayer))
-        {
-            Flip();
-        }
+        _animator.SetBool(IsMoving, _isMoving);
     }
 
+    
     void DetectPlayer()
     {
         if (!_player) return;
@@ -135,15 +124,59 @@ public class EnemyAI : MonoBehaviour
         
         _playerStats.currentDamage = _playerStats.defaultDamage;
 
-        _moveSpeed = _enemy.currentMoveSpeed * 1.5f;
+        jumpCooldown = 1f;
         float direction = (_player.position.x > transform.position.x) ? 1f : -1f;
-        _rb.linearVelocity = new Vector3(_moveSpeed * direction, _rb.linearVelocity.y, 0);
 
         // Flip sprite to face player
         if (direction > 0 && !_movingRight) Flip();
         if (direction < 0 && _movingRight) Flip();
     }
 
+    IEnumerator JumpRoutine()
+    {
+        while (true)
+        {
+            if (!_isJumping && !_isPaused)
+                Jump();
+            yield return new WaitForSeconds(jumpCooldown);
+        }
+    }
+
+    void Jump()
+    {
+        if (_isJumping) return;
+        
+        _isJumping = true;
+        
+        float moveDirection = _movingRight ? 1f : -1f;
+        
+        if(_playerDetected)
+            moveDirection = (_player.position.x > transform.position.x) ? 1f : -1f;
+        
+        _rb.linearVelocity = new Vector3(forwardForce * moveDirection, jumpForce, 0);
+        Invoke(nameof(Land), jumpCooldown / 2);
+    }
+
+    void Land()
+    {
+        _isJumping = false;
+
+        if (_movingRight && transform.position.x >= rightPatrolPoint.position.x)
+        {
+            StartCoroutine(PauseAtPatrolPoint());
+        }
+        else if (!_movingRight && transform.position.x <= leftPatrolPoint.position.x)
+        {
+            StartCoroutine(PauseAtPatrolPoint());
+        }
+
+        //RaycastHit hit;
+        /*
+        if(Physics.Raycast(transform.position, Vector3.right * (_movingRight ? 1 : -1), out hit, groundLayer))
+            Flip();
+            */
+    }
+    
     void Flip()
     {
         _movingRight = !_movingRight;
