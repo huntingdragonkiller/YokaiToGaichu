@@ -9,7 +9,9 @@ public class PlayerAttack : MonoBehaviour
     public Collider attackHitbox;
     public float attackDuration = 0.05f;
 
-    public static bool isAttacking = false;
+    public bool isAttacking;
+    
+    public AudioClip[] swingSounds;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -21,7 +23,7 @@ public class PlayerAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_gameManager.isPaused == false)
+        if (_gameManager.isPaused == false && _player.GetComponent<PlayerMovement>().onWall == false)
         {
             if (Input.GetKeyDown(KeyCode.Mouse0) && !isAttacking)
             {
@@ -33,6 +35,7 @@ public class PlayerAttack : MonoBehaviour
 
     private IEnumerator PerformAttack()
     {
+        AudioManager.instance.PlaySound(swingSounds[Random.Range(0, swingSounds.Length)], transform, 1f);
         isAttacking = true;
         attackHitbox.enabled = true;
         slashEffect.transform.localScale = new Vector3(transform.localScale.x, 1, 1);

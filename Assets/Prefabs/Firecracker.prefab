@@ -157,3 +157,5 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   explosionEffect: {fileID: 7844584383750357260, guid: 9fcba6f5fdf9a1840be464aa2cd6d755, type: 3}
+  throwSound: {fileID: 8300000, guid: 0562790c09612584eb54f77bcf4048a1, type: 3}
+  explodeSound: {fileID: 8300000, guid: dda10ea466b7a4c4f99056fa79c34d5b, type: 3}

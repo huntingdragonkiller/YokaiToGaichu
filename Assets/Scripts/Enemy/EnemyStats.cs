@@ -12,6 +12,8 @@ public class EnemyStats : MonoBehaviour
     [HideInInspector]
     public float currentDamage;
     
+    public AudioClip deathSound;
+    
     void Awake()
     {
         currentMoveSpeed = enemyData.MoveSpeed;
@@ -24,6 +26,7 @@ public class EnemyStats : MonoBehaviour
         currentHealth -= dmg;
         if (currentHealth <= 0)
         {
+            AudioManager.instance.PlaySound(deathSound, transform, 1f);
             Kill();
         }
     }

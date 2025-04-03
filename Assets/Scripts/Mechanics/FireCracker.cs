@@ -13,8 +13,12 @@ public class FireCracker : MonoBehaviour
     [Header("Effects")]
     public GameObject explosionEffect; // Optional, for visual effect
 
+    public AudioClip throwSound;
+    public AudioClip explodeSound;
+
     void Start()
     {
+        AudioManager.instance.PlaySound(throwSound, transform, 1f);
         // Auto-destroy after fuseTime seconds
         Invoke(nameof(Explode), fuseTime);
     }
@@ -46,7 +50,8 @@ public class FireCracker : MonoBehaviour
                 }
             }
         }
-
+        
+        AudioManager.instance.PlaySound(explodeSound, transform, 1f);
         Destroy(gameObject); // Destroy the firecracker itself
     }
 

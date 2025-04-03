@@ -1,6 +1,5 @@
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class PlayerThrow : MonoBehaviour
 {
@@ -8,6 +7,8 @@ public class PlayerThrow : MonoBehaviour
     public Transform throwPoint;
     public float throwForce = 5f;
     public float coolDownTime = 4f;
+    public Image firecrackerImage;
+    public Sprite fireCrackerSprite;
     
     private float _nextThrowTime;
     [HideInInspector]
@@ -21,10 +22,14 @@ public class PlayerThrow : MonoBehaviour
 
     void Update()
     {
-        if (firecrackerUnlocked && Input.GetKeyDown(KeyCode.F) && Time.time >= _nextThrowTime) // Change keybind as needed
+        if (firecrackerUnlocked) 
         {
-            ThrowFirecracker();
-            _nextThrowTime = Time.time + coolDownTime;
+            firecrackerImage.sprite = fireCrackerSprite;
+            if (Input.GetKeyDown(KeyCode.F) && Time.time >= _nextThrowTime) // Change keybind as needed
+            {
+                ThrowFirecracker();
+                _nextThrowTime = Time.time + coolDownTime;
+            }
         }
     }
 

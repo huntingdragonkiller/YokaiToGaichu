@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.UIElements;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -15,7 +15,8 @@ public class PlayerMovement : MonoBehaviour
     public float jumpForce = 7f;
     public float gravity = -9.81f;
     private bool _isGrounded;
-    private bool _onWall;
+    [HideInInspector]
+    public bool onWall;
     private bool _isJumping;
     private float _move;
     private float _moveY;
@@ -34,15 +35,22 @@ public class PlayerMovement : MonoBehaviour
     private bool _isAttacking;
     private float _fallingThreshold = -1f;
     private bool _isFalling;
+
+    [Header("Audio")] 
+    public AudioClip[] footSteps;
+    public AudioClip jumpSound;
     
     private float _facingDirection = 1f; // 1 for right, -1 for left
     private SpriteRenderer _sr;
     private Rigidbody _rb;
     private Animator _anim;
+    private PlayerAttack _playerAttack;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _playerAttack = GameObject.Find("Attack").GetComponent<PlayerAttack>();
         _anim = GetComponent<Animator>();
         _rb = GetComponent<Rigidbody>();
         _sr = GetComponent<SpriteRenderer>();
@@ -51,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        _isAttacking = PlayerAttack.isAttacking;
+        _isAttacking = _playerAttack.isAttacking;
         // Store movement input
         _move = Input.GetAxis("Horizontal");
         _moveY = Input.GetAxis("Vertical");
@@ -82,26 +90,27 @@ public class PlayerMovement : MonoBehaviour
         
         _anim.SetBool(IsAttacking, _isAttacking);
         _anim.SetBool(IsJumping, _isJumping);
-        _anim.SetBool(IsClimbing, _onWall);
+        _anim.SetBool(IsClimbing, onWall);
 
         // Horizontal movement
         _rb.linearVelocity = new Vector3(_move * speed, _rb.linearVelocity.y, 0);
         
         // Jumping
-        if (Input.GetButtonDown("Jump") && (_isGrounded || _onWall))
+        if (Input.GetButtonDown("Jump") && (_isGrounded || onWall))
         {
+            AudioManager.instance.PlaySound(jumpSound, transform, 1f);
             _rb.linearVelocity = new Vector3(_rb.linearVelocity.x, jumpForce, 0);
             _isGrounded = false;
-            _onWall = false;
+            onWall = false;
         }
 
-        if (_isGrounded || _onWall)
+        if (_isGrounded || onWall)
         {
             _isJumping = false;
         }
         else {_isJumping = true;}
 
-        if (!_onWall)
+        if (!onWall)
         {
             _sr.flipY = false;
         }
@@ -110,7 +119,7 @@ public class PlayerMovement : MonoBehaviour
         _isTouchingWall = IsTouchingWall();
         if (_isTouchingWall)
         {
-            _onWall = true;
+            onWall = true;
             _wallJumpTimer = wallJumpTime;
             _rb.linearVelocity = new Vector3(_rb.linearVelocity.x, _moveY * climbSpeed, 0);
             if (Input.GetKey(KeyCode.W)) // Climb up with W
@@ -161,6 +170,7 @@ public class PlayerMovement : MonoBehaviour
 
         void WallJump()
         {
+            AudioManager.instance.PlaySound(jumpSound, transform, 1f);
             Vector3 jumpDirection = transform.localScale.x > 0 ? Vector3.left : Vector3.right;
             _rb.linearVelocity = new Vector3(jumpDirection.x * _wallJumpForce, jumpHeight, 0);
         }
@@ -174,7 +184,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Wall"))
         {
-            _onWall = true;
+            onWall = true;
         }
     }
     private void OnCollisionExit(Collision collision)
@@ -185,7 +195,7 @@ public class PlayerMovement : MonoBehaviour
         }
         if (collision.gameObject.CompareTag("Wall"))
         {
-            _onWall = false;
+            onWall = false;
         }
     }
 
@@ -215,5 +225,10 @@ public class PlayerMovement : MonoBehaviour
                     break;
             }
         }
+    }
+
+    private void PlayFootsteps()
+    {
+        AudioManager.instance.PlaySound(footSteps[Random.Range(0, footSteps.Length)], transform, 1f);
     }
 }

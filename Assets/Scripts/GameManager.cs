@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && !deathMenu.activeSelf)
         {
             if(!isPaused)
                 Pause();
@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1f;
         }
 
-        if (isPaused)
+        if (isPaused && !deathMenu.activeSelf)
         {
             Time.timeScale = 0f;
         }
@@ -61,6 +61,7 @@ public class GameManager : MonoBehaviour
         player.SetActive(true);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         player.GetComponent<PlayerStats>().ResetStats();
+        isPaused = false;
     }
 
     public void Menu()
@@ -71,6 +72,7 @@ public class GameManager : MonoBehaviour
 
     public void PlayerDeath()
     {
+        isPaused = true;
         player.GetComponent<PlayerCheckpoint>().Respawn();
         player.SetActive(false);
         deathMenu.SetActive(true);

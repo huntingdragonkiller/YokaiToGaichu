@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEngine.Serialization;
+using UnityEngine.UI;
 
 public class Grapple : MonoBehaviour
 {
@@ -7,6 +7,8 @@ public class Grapple : MonoBehaviour
     public LayerMask grappleLayer;
     public Transform grappleStart, player;
     public GameObject grappleIndicator;
+    public Image grappleImage;
+    public Sprite grappleSprite;
     
     private ActiveObject _activeObject;
     private LineRenderer _lr;
@@ -31,8 +33,8 @@ public class Grapple : MonoBehaviour
     {
         if (grappleUnlocked)
         {
+            grappleImage.sprite = grappleSprite;
             GrappleIndicator();
-        
             if (Input.GetKeyDown(KeyCode.E))
             {
                 StartGrapple();

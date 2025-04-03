@@ -24,6 +24,9 @@ public class EnemyAI : MonoBehaviour
     
     public float patrolPauseDuration = 2f;
     private bool _isPaused = false;
+
+    public AudioClip alertSound;
+    private bool _soundPlayed;
     
     void Start()
     {
@@ -33,9 +36,9 @@ public class EnemyAI : MonoBehaviour
         _playerStats = GameObject.FindWithTag("Player").GetComponent<PlayerStats>();
     }
     
-    void FixedUpdate()
+    void Update()
     {
-        if (_isStunned && Time.time >= _stunEndTime)
+        if (_isStunned && Time.deltaTime >= _stunEndTime)
         {
             _isStunned = false;
         }
@@ -45,6 +48,7 @@ public class EnemyAI : MonoBehaviour
 
             if (_playerDetected)
             {
+                
                 _playerStats.currentDamage = _playerStats.defaultDamage;
                 ChasePlayer();
             }
@@ -114,6 +118,7 @@ public class EnemyAI : MonoBehaviour
                 {
                     if (hit.collider.CompareTag("Player"))
                     {
+                        PlaySoundOnce();
                         _playerDetected = true;
                         return;
                     }
@@ -121,6 +126,7 @@ public class EnemyAI : MonoBehaviour
             }
         }
         _playerDetected = false;
+        _soundPlayed = false;
     }
 
     void ChasePlayer()
@@ -147,7 +153,7 @@ public class EnemyAI : MonoBehaviour
     public void Stun(float duration)
     {
         _isStunned = true;
-        _stunEndTime = Time.time + duration;
+        _stunEndTime = Time.deltaTime + duration;
         StopEnemyMovement(); // Stops movement when stunned
     }
     
@@ -170,6 +176,15 @@ public class EnemyAI : MonoBehaviour
         _isPaused = false;
     }
 
+    void PlaySoundOnce()
+    {
+        if (!_soundPlayed)
+        {
+            AudioManager.instance.PlaySound(alertSound, transform, 1f);
+            _soundPlayed = true;
+        }
+    }
+    
     void OnDrawGizmos()
     {
         // Draw vision range

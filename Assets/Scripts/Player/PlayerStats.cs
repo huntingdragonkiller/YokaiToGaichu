@@ -22,12 +22,16 @@ public class PlayerStats : MonoBehaviour
     private bool _isInvincible;
 
     private GameManager _gameManager;
+    private PlayerAttack _attack;
+
+    public AudioClip hurtSound;
     
     void Start()
     {
         _currentHealth = maxHealth;
         currentDamage = defaultDamage;
         _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
+        _attack = GameObject.Find("Attack").GetComponent<PlayerAttack>();
     }
 
     void Update()
@@ -62,6 +66,7 @@ public class PlayerStats : MonoBehaviour
         if (!_isInvincible)
         {
             _currentHealth -= dmg;
+            AudioManager.instance.PlaySound(hurtSound, transform, 1f);
             
             _invincibilityTimer = invincibilityDuration;
             _isInvincible = true;
@@ -75,6 +80,10 @@ public class PlayerStats : MonoBehaviour
 
     public void ResetStats()
     {
+        StopAllCoroutines();
+        _attack.attackHitbox.enabled = false;
+        _attack.slashEffect.SetActive(false);
+        _attack.isAttacking = false;
         _currentHealth = maxHealth;
     }
 }
